@@ -4,6 +4,7 @@
     <input type="email" required v-model="email" />
     <label>Password:</label>
     <input type="password" required v-model="password" />
+    <div v-if="passwordError" class="error">{{ passwordError }}</div>
     <label>Role:</label>
     <select v-model="role">
       <option value="developer">Web developer</option>
@@ -34,6 +35,7 @@ export default {
       term: false,
       tempSkill: "",
       skills: [],
+      passwordError: "",
     };
   },
   methods: {
@@ -51,8 +53,20 @@ export default {
         return skill !== item;
       });
     },
+    handleSubmit() {
+      this.passwordError =
+        this.password.length > 5
+          ? ""
+          : "password must be at least 6 chars longs";
+          if (!this.passwordError) {
+        // make request to database to save user
+        console.log('email: ', this.email)
+        console.log('password: ', this.password)
+        console.log('role: ', this.role)
+        console.log('skills: ', this.skills)
+        console.log('terms accepted: ', this.terms)
+    },
   },
-  handleSubmit() {},
 };
 </script>
 
